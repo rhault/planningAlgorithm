@@ -1,0 +1,11 @@
+{
+  "name": "planningAlgorithm",
+  "version": "1.0.0",
+  "description": "Planning Algorithm CPU",
+  "main": "index.js",
+  "author": "Rhault",
+  "license": "MIT",
+  "dependencies": {
+    "rxjs": "^5.3.0"
+  }
+}
