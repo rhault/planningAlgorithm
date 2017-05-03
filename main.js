@@ -1,6 +1,7 @@
 let rx = require('rxjs/Rx')
 let memory  = []
 let temp = []
+let type = 0
 
 function sorting(json, key) {
     function sortByKey(a,b) {
@@ -72,3 +73,5 @@ function finish(){
 		memory[i].res = memory[i].ant + memory[i].raf
 	}
 })();
+
+console.log(memory)
