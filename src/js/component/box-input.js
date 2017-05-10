@@ -4,13 +4,14 @@ let box = {
     },
 	template:
 		`<div>
-            <span> {{title}}  </span>
+            <label> {{title}}  </label>
             <div class="input-group input-number-group">
                 <div v-on:click="less()" class="input-group-button">
                    <span class="input-number-decrement">-</span>
                 </div>
-                <input v-model="counter" class="input-number" type="number">
-                <div v-on:click="raf += 1" class="input-group-button">
+                <input ref=input v-model="counter" 
+                    v-on:input=valor($event.target.value) class="input-number" type="number">
+                <div v-on:click="more()" class="input-group-button">
                     <span class="input-number-increment">+</span>
                 </div>
             </div>
@@ -19,9 +20,18 @@ let box = {
         return {counter :0}
     },
     methods:{
-        less: function(){
-            console.log(this.raf)
-            //if(this.counter > 0){this.counter -= 1}
-        }
+        more: function(){
+            this.counter += 1
+            this.$emit("input", this.counter)
+        },
+        less: function(){           
+            if(this.counter > 0){
+                this.counter -= 1
+                this.$emit("input", this.counter)
+            }
+        },
+        valor(e){
+            this.$emit("input", this.counter)
+        },
     }
 }

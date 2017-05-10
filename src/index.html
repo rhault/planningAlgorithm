@@ -29,26 +29,9 @@
                   <div class="login-box-form-section">
                     <h5 class="login-box-title">FIFO</h5>
                     <input v-model="name" class="login-box-input" type="text" name="username" placeholder="Username" />
-                    <span>Time start</span>
-                    <div class="input-group input-number-group">
-                      <div class="input-group-button">
-                        <span class="input-number-decrement">-</span>
-                      </div>
-                      <input v-model="tll" class="input-number" type="number" value="1" min="0" max="1000">
-                      <div class="input-group-button">
-                        <span class="input-number-increment">+</span>
-                      </div>
-                    </div>
-                    <span>Time rafaga</span>
-                    <div class="input-group input-number-group">
-                      <div class="input-group-button">
-                        <span class="input-number-decrement">-</span>
-                      </div>
-                      <input v-model="raf" class="input-number" type="number" value="1" min="0" max="1000">
-                      <div class="input-group-button">
-                        <span class="input-number-increment">+</span>
-                      </div>
-                    </div>
+
+                    <box-input title="Time start" v-model="tll"></box-input>
+                    <box-input title="Time rafaga" v-model="raf"></box-input>
 
                     <input class="login-box-submit-button" v-on:click="add" type="submit" name="signup_submit" value="add" />
                   </div>
