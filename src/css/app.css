@@ -1,3 +1,11 @@
+body{
+	background: #ECEFF1
+}
+
+.wrap{
+	margin-top: 1em
+}
+
 .red{
 	background: red
 }
@@ -17,23 +25,17 @@
 
 .login-box-form-section,
 .login-box-social-section-inner {
-  padding: 2.5rem;
-}
-
-.login-box-social-section {
-  /*background: url("https://images.pexels.com/photos/179124/pexels-photo-179124.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb");*/
-  background-size: cover;
-  background-position: center;
+  padding: 3.5rem;
 }
 
 .login-box-input {
   margin-bottom: 1.25rem;
-  height: 2rem;
   border: 0;
-  padding-left: 0;
+  padding: 0 12px;
   box-shadow: none;
   border-bottom: 1px solid #1779ba;
   font-weight: 400;
+  width: 250px
 }
 
 .login-box-input:focus {
@@ -44,43 +46,14 @@
   border-bottom: 2px solid #1779ba;
 }
 
-.login-box-submit-button {
-  display: inline-block;
-  vertical-align: middle;
-  margin: 0 0 1rem 0;
-  padding: 0.85em 1em;
-  -webkit-appearance: none;
-  border: 1px solid transparent;
-  border-radius: 0;
-  transition: background-color 0.25s ease-out, color 0.25s ease-out;
-  font-size: 0.9rem;
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
-  background-color: #1779ba;
-  color: #fefefe;
-  display: block;
-  width: 100%;
-  margin-right: 0;
-  margin-left: 0;
-  border-radius: 0;
-  text-transform: uppercase;
-  margin-bottom: 0;
-}
-
-
 .input-number-group {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: left;
-          justify-content: left;
 }
 
 .input-number-group input[type=number]::-webkit-inner-spin-button,
 .input-number-group input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-          appearance: none;
+	-webkit-appearance: none;
+    appearance: none;
 }
 
 .input-number-group .input-group-button {
@@ -88,32 +61,35 @@
 }
 
 .input-number-group .input-number {
-  width: 80px;
+  width: 170px;
   padding: 0 12px;
-  vertical-align: top;
   text-align: center;
   outline: none;
-  display: block;
   margin: 0;
+  height: 2rem;
+  box-shadow: none;
+  font-weight: 400;
+  margin-left: 36.56px;
+}
+
+.input-number:focus {
+  color: #1779ba;
+  box-shadow: none;
 }
 
 .input-number-group .input-number,
 .input-number-group .input-number-decrement,
 .input-number-group .input-number-increment {
-  border: 1px solid #cacaca;
-  height: 40px;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-  border-radius: 0;
+  height: 40px;   
+  user-select: none;
 }
 
 .input-number-group .input-number-decrement,
 .input-number-group .input-number-increment {
+  border: 1px solid #cacaca;
   display: inline-block;
   width: 40px;
-  background: #e6e6e6;
+  background: #fff;
   color: #0a0a0a;
   text-align: center;
   font-weight: bold;
@@ -122,36 +98,75 @@
   font-weight: 400;
 }
 
-.input-number-group .input-number {
-	margin-left: 36.5px;
-  	width: 50px
+.time{
+	font-weight: 300;
+  	font-size: 0.675rem;
+  	color: #1779ba;
 }
 
-
-.input-number-group .input-number-increment {
-  margin-left: 0rem;
+.submit{
+	width: 123px
 }
-
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-
-
-.fullscreen-image-slider .orbit-image {
-  width: 100%;
-  height: 100vh;
+.blue{
+	background: blue
 }
 
-.fullscreen-image-slider .orbit-caption {
-  bottom: 50%;
-  -webkit-transform: translateY(50%);
-      -ms-transform: translateY(50%);
-          transform: translateY(50%);
-  background: none;
+.stats-list {
+  list-style-type: none;
+  clear: left;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  color: #fefefe;
+  margin-bottom: 30px;
+}
+
+.stats-list .stats-list-positive {
+  color: #3adb76;
+}
+
+.stats-list .stats-list-negative {
+  color: #cc4b37;
+}
+
+.stats-list > li {
+  display: inline-block;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #cacaca;
+  text-align: center;
+  font-size: 1.1em;
   font-weight: bold;
 }
 
+.stats-list > li:last-child {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stats-list > li .stats-list-label {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.head {
+  background-color: #fefefe;
+  border: solid 1px #cacaca;
+  width: 100%;
+  text-align: center;
+  list-style-type: none;
+}
+
+.title {
+  background-color: #0a0a0a;
+  color: #fefefe;
+  border-bottom: 0;
+    border: solid 1px #cacaca;
+  width: 100%;
+  text-align: center;
+  list-style-type: none;
+
+}

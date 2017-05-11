@@ -5,7 +5,9 @@ let app = new Vue({
 		datas: [],
 		name: "",
 		tll: 0,
-		raf: 0
+		raf: 0,
+		pri: 0,
+		qt: 0
 	},
 
 	components: {
@@ -17,11 +19,21 @@ let app = new Vue({
   	},
 
 	methods:{
+		change: function(){
+			this.datas = []
+			this.name = "",
+			this.tll = 0,
+			this.raf = 0,
+			this.pri = 0,
+			this.qt = 0
+		},
 		add: function(event){
 			this.datas.push({
 				'name':this.name,
 				'tll': this.tll,
-				'raf': this.raf
+				'raf': this.raf,
+				'pri': this.pri,
+				'qt': this.qt
 			})
 
 			console.log(this.datas)

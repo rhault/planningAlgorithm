@@ -4,7 +4,7 @@ let box = {
     },
 	template:
 		`<div>
-            <label> {{title}}  </label>
+            <label class="time"> <h6> {{title}} </h6> </label>
             <div class="input-group input-number-group">
                 <div v-on:click="less()" class="input-group-button">
                    <span class="input-number-decrement">-</span>

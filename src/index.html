@@ -2,75 +2,230 @@
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foundation for Sites</title>
-    <!--link rel="stylesheet" href="css/foundation.css"-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css" integrity="sha256-itWEYdFWzZPBG78bJOOiQIn06QCgN/F0wMDcC4nOhxY=" crossorigin="anonymous" />
-
+    <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body>
-    <div  id="app" class="row columns large-12">
+    <div  id="app" class="wrap row columns large-12">
+      <!-- Menu -->
       <ul class="tabs" data-tabs id="example-tabs">
-        <li class="tabs-title is-active"><a href="#panel1" aria-selected="true">FIFO</a></li>
-        <li class="tabs-title"><a href="#panel2">PRIORITY</a></li>
-        <li class="tabs-title"><a href="#panel2">SJF</a></li>
-        <li class="tabs-title"><a href="#panel2">ROUND ROBI</a></li>
+        <li v-on:click="change" class="tabs-title is-active"><a href="#panel1" aria-selected="true">FIFO</a></li>
+        <li v-on:click="change" class="tabs-title"><a href="#panel2">PRIORITY</a></li>
+        <li v-on:click="change" class="tabs-title"><a href="#panel3">SJF</a></li>
+        <li v-on:click="change" class="tabs-title"><a href="#panel4">ROUND ROBI</a></li>
       </ul>
 
+      <!-- Panels -->
       <div class="tabs-content" data-tabs-content="example-tabs">
-      <!--panel 1-->
+        <!-- Start Panel 1 -->
         <div class="tabs-panel is-active" id="panel1">
           <div class="row columns large-12">
             <div class="login-box">
+              <!-- Start Setions -->
               <div class="row collapse expanded">
-                <div class="small-12 medium-6 column small-order-2 medium-order-1">
-                  <div class="login-box-form-section">
+
+                <!-- Start Setion 1 -->
+                <div class="small-12 medium-6 column large-5">
+                  <div class="login-box-form-section large-10">
                     <h5 class="login-box-title">FIFO</h5>
-                    <input v-model="name" class="login-box-input" type="text" name="username" placeholder="Username" />
+                    <input v-model="name" class="login-box-input" type="text" placeholder="Nombre de Proceso"/>
 
-                    <box-input title="Time start" v-model="tll"></box-input>
-                    <box-input title="Time rafaga" v-model="raf"></box-input>
+                    <box-input title="Tiempo de Llegada" v-model="tll"></box-input>
+                    <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
 
-                    <input class="login-box-submit-button" v-on:click="add" type="submit" name="signup_submit" value="add" />
+                    <span class="button submit" v-on:click="add">AGREGAR</span>
+                    <span class="button submit success">CALCULAR</a>
+
                   </div>
                 </div>
+                <!-- End Setion 1 -->
+
                 <!--Session 2-->
-                <div class="small-12 medium-6 column small-order-1 medium-order-2 login-box-social-section">
+                <div class="small-12 medium-6 column large-7 login-box-social-section">
                   <div class="login-box-social-section-inner">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>tll</th>
-                        <th>raf</th>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Proceso</th>
+                          <th>T. Llegada</th>
+                          <th>T. Rafaga</th>
+                        </tr>
+                      </thead>
+                      <tr v-for="data in datas">
+                        <th>{{data.name}}</th>
+                        <th>{{data.tll}}</th>
+                        <th>{{data.raf}}</th>
                       </tr>
-                    </thead>
-                    <tr v-for="data in datas">
-                      <th>{{data.name}}</th>
-                      <th>{{data.tll}}</th>
-                      <th>{{data.raf}}</th>
-                    </tr>
-                  </table>
-      </div>
-    </div>
-  </div>
-</div>
-
-
+                    </table>
+                  </div>
+                </div>
+                <!-- End Setion 2 -->
+              </div>
+              <!-- End Setions -->
+            </div>
           </div>
         </div>
+        <!-- End Panel 1 -->
+        <!-- Start Panel 2 -->
         <div class="tabs-panel" id="panel2">
-          <p>Suspendisse dictum feugiat nisl ut dapibus.  Vivamus hendrerit arcu sed erat molestie vehicula. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.  Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor.</p>
+          <div class="row columns large-12">
+            <div class="login-box">
+              <!-- Start Setions -->
+              <div class="row collapse expanded">
+
+                <!-- Start Setion 1 -->
+                <div class="small-12 medium-6 column large-5">
+                  <div class="login-box-form-section large-10">
+                    <h5 class="login-box-title">Priority</h5>
+                    <input v-model="name" class="login-box-input" type="text" placeholder="Nombre de Proceso"/>
+
+                    <box-input title="Tiempo de Llegada" v-model="tll"></box-input>
+                    <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
+                    <box-input title="Prioridad" v-model="raf"></box-input>
+
+                    <span class="button submit" v-on:click="add">AGREGAR</span>
+                    <span class="button submit success">CALCULAR</a>
+
+                  </div>
+                </div>
+                <!-- End Setion 1 -->
+
+                <!--Session 2-->
+                <div class="small-12 medium-6 column large-7 login-box-social-section">
+                  <div class="login-box-social-section-inner">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Proceso</th>
+                          <th>T. Llegada</th>
+                          <th>T. Rafaga</th>
+                          <th>Prioridad</th>
+                        </tr>
+                      </thead>
+                      <tr v-for="data in datas">
+                        <th>{{data.name}}</th>
+                        <th>{{data.tll}}</th>
+                        <th>{{data.raf}}</th>
+                        <th>{{data.pri}}</th>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- End Setion 2 -->
+              </div>
+              <!-- End Setions -->
+            </div>
+          </div>
         </div>
+        <!-- End Panel 2 -->
+        <!-- Start Panel 3 -->
+        <div class="tabs-panel" id="panel3">
+          <div class="row columns large-12">
+            <div class="login-box">
+              <!-- Start Setions -->
+              <div class="row collapse expanded">
+
+                <!-- Start Setion 1 -->
+                <div class="small-12 medium-6 column large-5">
+                  <div class="login-box-form-section large-10">
+                    <h5 class="login-box-title">SJF</h5>
+                    <input v-model="name" class="login-box-input" type="text" placeholder="Nombre de Proceso"/>
+
+                    <box-input title="Tiempo de Llegada" v-model="tll"></box-input>
+                    <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
+
+                    <span class="button submit" v-on:click="add">AGREGAR</span>
+                    <span class="button submit success">CALCULAR</a>
+
+                  </div>
+                </div>
+                <!-- End Setion 1 -->
+
+                <!--Session 2-->
+                <div class="small-12 medium-6 column large-7 login-box-social-section">
+                  <div class="login-box-social-section-inner">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Proceso</th>
+                          <th>T. Llegada</th>
+                          <th>T. Rafaga</th>
+                        </tr>
+                      </thead>
+                      <tr v-for="data in datas">
+                        <th>{{data.name}}</th>
+                        <th>{{data.tll}}</th>
+                        <th>{{data.raf}}</th>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- End Setion 2 -->
+              </div>
+              <!-- End Setions -->
+            </div>
+          </div>
+        </div>
+        <!-- End Panel 3 -->
+        <!-- Start Panel 4 -->
+        <div class="tabs-panel" id="panel4">
+          <div class="row columns large-12">
+            <div class="login-box">
+              <!-- Start Setions -->
+              <div class="row collapse expanded">
+
+                <!-- Start Setion 1 -->
+                <div class="small-12 medium-6 column large-5">
+                  <div class="login-box-form-section large-10">
+                    <h5 class="login-box-title">Priority</h5>
+                    <input v-model="name" class="login-box-input" type="text" placeholder="Nombre de Proceso"/>
+
+                    <box-input title="Tiempo de Llegada" v-model="tll"></box-input>
+                    <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
+                    <box-input title="Quantum" v-model="qt"></box-input>
+
+                    <span class="button submit" v-on:click="add">AGREGAR</span>
+                    <span class="button submit success">CALCULAR</a>
+
+                  </div>
+                </div>
+                <!-- End Setion 1 -->
+
+                <!--Session 2-->
+                <div class="small-12 medium-6 column large-7 login-box-social-section">
+                  <div class="login-box-social-section-inner">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Proceso</th>
+                          <th>T. Llegada</th>
+                          <th>T. Rafaga</th>
+                          <th>Quantum</th>
+                        </tr>
+                      </thead>
+                      <tr v-for="data in datas">
+                        <th>{{data.name}}</th>
+                        <th>{{data.tll}}</th>
+                        <th>{{data.raf}}</th>
+                        <th>{{data.qt}}</th>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+                <!-- End Setion 2 -->
+              </div>
+              <!-- End Setions -->
+            </div>
+          </div>
+        </div>
+        <!-- End Panel 4 -->
       </div>
     </div>
-
 
     <script src="js/vendor/jquery.js"></script>
     <script src="js/vendor/vue.min.js"></script>
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.min.js" integrity="sha256-Nd2xznOkrE9HkrAMi4xWy/hXkQraXioBg9iYsBrcFrs=" crossorigin="anonymous"></script-->
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>    
     <script src="js/component/box-input.js"></script>    
