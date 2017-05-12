@@ -1,5 +1,11 @@
 body{
-	background: #ECEFF1
+	background: white;
+}
+
+.thead{
+	background: #045394;
+	color: #FFF;
+  	font-size: 21px;
 }
 
 .wrap{
@@ -8,6 +14,10 @@ body{
 
 .red{
 	background: red
+}
+
+.tabs-content{
+	box-shadow: 0 1px 4px rgba(10, 10, 10, 0.4);
 }
 
 .login-box {
@@ -112,6 +122,31 @@ body{
 	background: blue
 }
 
+.wrap-s{
+	background: white;
+	box-shadow: 0 1px 4px rgba(10, 10, 10, 0.4);
+	margin-top: 1em;
+}
+
+.card{
+	box-shadow: 0 1px 4px rgba(10, 10, 10, 0.4);
+	margin-top: 1em;
+	margin-bottom: 3em;
+}
+
+.info .stats-list{
+	background: #cdddea;
+	border-radius: 5px;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	
+  	padding: 4px;
+}
+
+.info .stats-list > li{
+	border: 0;
+}
+
 .stats-list {
   list-style-type: none;
   clear: left;
@@ -122,7 +157,7 @@ body{
 }
 
 .stats-list .stats-list-positive {
-  color: #3adb76;
+  color: #ffae00;
 }
 
 .stats-list .stats-list-negative {
@@ -161,12 +196,19 @@ body{
 }
 
 .title {
-  background-color: #0a0a0a;
-  color: #fefefe;
-  border-bottom: 0;
-    border: solid 1px #cacaca;
+  background-color: #045394;
+  color: #FFF;
+  font-size: 21px;
+  padding: 4px;
+  border-radius: 5px;
   width: 100%;
   text-align: center;
   list-style-type: none;
 
+}
+
+.back{
+	border-bottom: 1px solid blue;
+	font-size: 21px;
+  margin-bottom: 2em 
 }

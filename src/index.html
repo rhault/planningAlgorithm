@@ -3,22 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foundation for Sites</title>
+    <title>Planning</title>
     <link rel="stylesheet" href="css/foundation.min.css">
     <link rel="stylesheet" href="css/app.css">
   </head>
-  <body>
-    <div  id="app" class="wrap row columns large-12">
-      <!-- Menu -->
-      <ul class="tabs" data-tabs id="example-tabs">
+  <body >
+    <div id="app">
+      <div class="wrap row columns large-12" v-show="wrap_p">
+      
+        <!-- Menu -->
+        <ul class="tabs" data-tabs id="example-tabs">
         <li v-on:click="change" class="tabs-title is-active"><a href="#panel1" aria-selected="true">FIFO</a></li>
         <li v-on:click="change" class="tabs-title"><a href="#panel2">PRIORITY</a></li>
         <li v-on:click="change" class="tabs-title"><a href="#panel3">SJF</a></li>
         <li v-on:click="change" class="tabs-title"><a href="#panel4">ROUND ROBI</a></li>
-      </ul>
+        </ul>
 
-      <!-- Panels -->
-      <div class="tabs-content" data-tabs-content="example-tabs">
+        <!-- Start Panels -->
+        <div class="tabs-content" data-tabs-content="example-tabs">
         <!-- Start Panel 1 -->
         <div class="tabs-panel is-active" id="panel1">
           <div class="row columns large-12">
@@ -36,8 +38,7 @@
                     <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
 
                     <span class="button submit" v-on:click="add">AGREGAR</span>
-                    <span class="button submit success">CALCULAR</a>
-
+                    <span class="button submit success" v-on:click="calcular">CALCULAR</span>
                   </div>
                 </div>
                 <!-- End Setion 1 -->
@@ -46,7 +47,7 @@
                 <div class="small-12 medium-6 column large-7 login-box-social-section">
                   <div class="login-box-social-section-inner">
                     <table>
-                      <thead>
+                      <thead class="thead">
                         <tr>
                           <th>Proceso</th>
                           <th>T. Llegada</th>
@@ -86,7 +87,7 @@
                     <box-input title="Prioridad" v-model="raf"></box-input>
 
                     <span class="button submit" v-on:click="add">AGREGAR</span>
-                    <span class="button submit success">CALCULAR</a>
+                    <span class="button submit success" v-on:click="calcular">CALCULAR</span>
 
                   </div>
                 </div>
@@ -96,7 +97,7 @@
                 <div class="small-12 medium-6 column large-7 login-box-social-section">
                   <div class="login-box-social-section-inner">
                     <table>
-                      <thead>
+                      <thead class="thead">
                         <tr>
                           <th>Proceso</th>
                           <th>T. Llegada</th>
@@ -137,7 +138,7 @@
                     <box-input title="Tiempo de Rafaga" v-model="raf"></box-input>
 
                     <span class="button submit" v-on:click="add">AGREGAR</span>
-                    <span class="button submit success">CALCULAR</a>
+                    <span class="button submit success" v-on:click="calcular">CALCULAR</span>
 
                   </div>
                 </div>
@@ -147,7 +148,7 @@
                 <div class="small-12 medium-6 column large-7 login-box-social-section">
                   <div class="login-box-social-section-inner">
                     <table>
-                      <thead>
+                      <thead class="thead">
                         <tr>
                           <th>Proceso</th>
                           <th>T. Llegada</th>
@@ -179,7 +180,7 @@
                 <!-- Start Setion 1 -->
                 <div class="small-12 medium-6 column large-5">
                   <div class="login-box-form-section large-10">
-                    <h5 class="login-box-title">Priority</h5>
+                    <h5 class="login-box-title">Round Robi</h5>
                     <input v-model="name" class="login-box-input" type="text" placeholder="Nombre de Proceso"/>
 
                     <box-input title="Tiempo de Llegada" v-model="tll"></box-input>
@@ -187,7 +188,7 @@
                     <box-input title="Quantum" v-model="qt"></box-input>
 
                     <span class="button submit" v-on:click="add">AGREGAR</span>
-                    <span class="button submit success">CALCULAR</a>
+                    <span class="button submit success" v-on:click="calcular">CALCULAR</span>
 
                   </div>
                 </div>
@@ -197,7 +198,7 @@
                 <div class="small-12 medium-6 column large-7 login-box-social-section">
                   <div class="login-box-social-section-inner">
                     <table>
-                      <thead>
+                      <thead class="thead">
                         <tr>
                           <th>Proceso</th>
                           <th>T. Llegada</th>
@@ -221,6 +222,77 @@
           </div>
         </div>
         <!-- End Panel 4 -->
+        </div>
+        <!-- End Panels -->
+      </div>
+
+      <div  v-if="wrap_s" class="wrap-s row columns large-10 ">
+        <div class="  card">
+          <ul class="stats-list">
+            <li>Tiempo anticipado
+              <span class="stats-list-label">Nombre</span> Tiempo final
+            </li>
+            <li class="stats-list-negative">
+              135 <span class="stats-list-label">p1</span> 23
+            </li>
+            <li class="stats-list-negative">
+              135 <span class="stats-list-label">p2</span> 23
+            </li>
+            <li class="stats-list-negative">
+              135 <span class="stats-list-label">p3</span> 23
+            </li>
+          </ul>
+        </div>
+
+        <div class="row columns info">
+          <div class="columns large-6">
+            <div>
+              <label class="title">Informacion de Procesos</label>
+              <ul class="stats-list">
+                <li>laago
+                  <span class="stats-list-label">Nombre</span> 
+                </li>
+                <li>34
+                  <span class="stats-list-label">Espera</span> 
+                </li>
+                <li>34
+                  <span class="stats-list-label">Respuesta</span> 
+                </li>
+                <li>34
+                  <span class="stats-list-label">Llegada</span> 
+                </li>
+                <li>3400
+                  <span class="stats-list-label">Rafaga</span> 
+                </li>
+                <li>3400
+                  <span class="stats-list-label">Rafaga</span> 
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="columns large-6">
+            <div class="columns large-6">
+              <label class="title">Espera</label>
+              <ul class="stats-list">
+                <li>laago
+                  <span class="stats-list-label">Nombre</span> 
+                </li>
+              </ul>
+            </div>
+            <div class="columns large-6">
+              <label class="title">Respuesta</label>
+              <ul class="stats-list">
+                <li>laago
+                  <span class="stats-list-label">Nombre</span> 
+                </li>
+              </ul>
+            </div>
+            <div class="columns large-5">
+              <a class="back row columns" v-on:click="back">Editar Procesos</a>
+            </div>
+          </div>          
+        </div>
       </div>
     </div>
 

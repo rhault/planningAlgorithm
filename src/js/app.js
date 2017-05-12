@@ -7,7 +7,9 @@ let app = new Vue({
 		tll: 0,
 		raf: 0,
 		pri: 0,
-		qt: 0
+		qt: 0,
+		wrap_p: true,
+		wrap_s: false
 	},
 
 	components: {
@@ -37,6 +39,15 @@ let app = new Vue({
 			})
 
 			console.log(this.datas)
+		},
+		back: function(){
+			this.wrap_p = true
+			this.wrap_s = false
+			this.change()
+		},
+		calcular: function(){
+			this.wrap_p = false
+			this.wrap_s = true
 		}
 	}
 })
