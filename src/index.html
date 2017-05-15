@@ -232,14 +232,8 @@
             <li>Tiempo anticipado
               <span class="stats-list-label">Nombre</span> Tiempo final
             </li>
-            <li class="stats-list-negative">
-              135 <span class="stats-list-label">p1</span> 23
-            </li>
-            <li class="stats-list-negative">
-              135 <span class="stats-list-label">p2</span> 23
-            </li>
-            <li class="stats-list-negative">
-              135 <span class="stats-list-label">p3</span> 23
+            <li v-for="(data, index) in datas" class="stats-list-negative">
+              {{data.ant}} <span class="stats-list-label">{{data.name}}</span> {{data.fin}}
             </li>
           </ul>
         </div>
@@ -248,20 +242,20 @@
           <div class="columns large-6">
             <div>
               <label class="title">Informacion de Procesos</label>
-              <ul class="stats-list">
-                <li>laago
+              <ul v-for="data in datas" class="stats-list">
+                <li>{{data.name}}
                   <span class="stats-list-label">Nombre</span> 
                 </li>
-                <li>34
+                <li>{{data.esp}}
                   <span class="stats-list-label">Espera</span> 
                 </li>
-                <li>34
+                <li>{{data.res}}
                   <span class="stats-list-label">Respuesta</span> 
                 </li>
-                <li>34
+                <li>{{data.tll}}
                   <span class="stats-list-label">Llegada</span> 
                 </li>
-                <li>3400
+                <li>{{data.raf}}
                   <span class="stats-list-label">Rafaga</span> 
                 </li>
                 <li>3400
@@ -297,6 +291,8 @@
     </div>
 
     <script src="js/vendor/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.4.0/Rx.js"></script>
+    <script src="../main.js"></script>
     <script src="js/vendor/vue.min.js"></script>
     <script src="js/vendor/what-input.js"></script>
     <script src="js/vendor/foundation.js"></script>    

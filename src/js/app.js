@@ -37,8 +37,6 @@ let app = new Vue({
 				'pri': this.pri,
 				'qt': this.qt
 			})
-
-			console.log(this.datas)
 		},
 		back: function(){
 			this.wrap_p = true
@@ -48,6 +46,7 @@ let app = new Vue({
 		calcular: function(){
 			this.wrap_p = false
 			this.wrap_s = true
+			this.datas = cal(this.datas,0)
 		}
 	}
 })
