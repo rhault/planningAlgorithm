@@ -1,7 +1,8 @@
 let rx = require('rxjs/Rx')
 let memory  = []
 let temp = []
-let type = 0
+let type = 2
+let t = []
 
 function sorting(json, key) {
     function sortByKey(a,b) {
@@ -14,9 +15,10 @@ function sorting(json, key) {
 
 //***************************************************//
 let entry = [
-	{'name': "a", 'tll':1, 'raf': 2},
-	{'name': "b", 'tll':0, 'raf': 4},
-	{'name': "c", 'tll':0, 'raf': 3}
+	{'name': "a", 'tll':5, 'raf': 2},
+	{'name': "b", 'tll':1, 'raf': 2},
+	{'name': "c", 'tll':5, 'raf': 2},
+	{'name': "d", 'tll':1, 'raf': 1}
 ]
 
 let data = rx.Observable.from(entry)
@@ -53,7 +55,25 @@ function finish(){
 	if(type == 2){
 		for(let i=0; i<=temp.length-1; i++){
 			memory.push(temp[i])		
-		}	
+		}
+
+		temp = []
+		memory.filter(function(a,b,c){
+			for(let x=1; x<=c.length; x++){
+
+				if(c[x-1]["raf"] == a.raf){
+					temp.push(c.splice(x-1,1)[0])
+					x=0
+				}
+			} t = c	
+		})
+
+		sorting(temp, "tll")
+		for (let i = 0; i < t.length; i++) {
+			temp.push(t[i])
+		}
+		sorting(temp, "raf")
+		memory = temp
 	}
 }
 
