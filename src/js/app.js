@@ -46,7 +46,7 @@ let app = new Vue({
 		calcular: function(){
 			this.wrap_p = false
 			this.wrap_s = true
-			this.datas = cal(this.datas,0)
+			this.datas = cal(this.datas,2)
 		}
 	}
 })

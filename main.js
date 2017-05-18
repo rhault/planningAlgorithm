@@ -1,10 +1,12 @@
-function cal(entry, type){
+//function cal(entry, type){
 
-	let rx = Rx
+	let rx = require("rxjs/Rx")
 	let memory  = []
 	let temp = []
-	//let type = 2
+	let type = 3
 	let t = []
+	let wait = []
+	let qt = 4
 
 	function sorting(json, key) {
 	    function sortByKey(a,b) {
@@ -15,12 +17,15 @@ function cal(entry, type){
 	    json.sort(sortByKey);
 	}
 
-	// let entry = [
-	// 	{'name': "a", 'tll':5, 'raf': 2},
-	// 	{'name': "b", 'tll':1, 'raf': 2},
-	// 	{'name': "c", 'tll':5, 'raf': 2},
-	// 	{'name': "d", 'tll':1, 'raf': 1}
-	// ]
+	function newJson(){
+		temp.push({"name":memory[0].name, "tll":memory[0].tll, "raf":memory[0].raf, 
+			"newRaf":memory[0].newRaf,"orgRaf": memory[0].orgRaf})
+	}
+
+	let entry = [
+		{'name': "a", 'tll':5, 'raf': 4}
+		
+	]
 
 	let data = rx.Observable.from(entry)
 		data.subscribe(proces,err,finish)
@@ -43,8 +48,10 @@ function cal(entry, type){
 				temp.push({'name':x.name, 'tll':x.tll, 'raf':x.raf})
 				sorting(temp, "raf")
 			}
-		}else{
+		}else if(type == 3){
 			//Round Robi
+			memory.push({'name':x.name, 'tll':x.tll, 'raf':x.raf, "orgRaf": x.raf})
+
 		}
 	}
 
@@ -76,6 +83,45 @@ function cal(entry, type){
 			sorting(temp, "raf")
 			memory = temp
 		}
+
+		if(type == 3){
+			let count = memory.length
+
+			for(let i=0; i<=memory.length-1; i++){
+				memory[i].newRaf = Math.ceil(memory[i].raf/qt)
+			}
+
+			while(count > 0){
+				let rot = memory[0].newRaf 
+				for(let i=0; i<=rot; i++){
+
+					if(memory[0].newRaf > 1){
+						memory[0].newRaf -= 1
+						memory[0].orgRaf = memory[0].orgRaf - qt
+						memory[0].raf = qt
+						newJson()
+						
+					}else if(memory[0].newRaf <= 1){
+
+						if(memory[0].orgRaf == qt){
+							memory[0].newRaf -= 1
+							memory[0].raf = qt
+							newJson()
+							memory.splice(0,1)
+							i = rot
+						}else{
+							memory[0].newRaf -= 1
+							memory[0].raf = memory[0].orgRaf 
+							newJson()
+							memory.splice(0,1)
+							i = rot
+						}
+					}
+				}count = memory.length
+			}
+
+			console.log("temp", temp)			
+		}
 	}
 
 	//Graficar
@@ -87,7 +133,7 @@ function cal(entry, type){
 			memory[i+1].ant = memory[i].ant + memory[i].raf
 			memory[i+1].fin = memory[i+1].ant + memory[i+1].raf
 		}
-	})();
+	});
 
 	//Calcular
 	(function(){
@@ -95,8 +141,8 @@ function cal(entry, type){
 			memory[i].esp = memory[i].ant - memory[i].tll
 			memory[i].res = memory[i].ant + memory[i].raf
 		}
-	})();
+	});
 
-	console.log(memory)
-	return memory
-}
+	console.log("memory:",memory)
+	//return memory
+//}
