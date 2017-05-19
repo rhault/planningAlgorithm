@@ -1,13 +1,12 @@
-//function cal(entry, type){
+function cal(entry, type,qt){
 
-	let rx = require("rxjs/Rx")
+	let rx = Rx
 	let memory  = []
 	let temp = []
-	let type = 3
+	//let type = 3
+	//let qt = 2
 	let t = []
-	let wait = []
-	let qt = 4
-
+	
 	function sorting(json, key) {
 	    function sortByKey(a,b) {
 	        let x = a[key]
@@ -17,15 +16,20 @@
 	    json.sort(sortByKey);
 	}
 
-	function newJson(){
-		temp.push({"name":memory[0].name, "tll":memory[0].tll, "raf":memory[0].raf, 
-			"newRaf":memory[0].newRaf,"orgRaf": memory[0].orgRaf})
+	function newJson(arr) {
+		return {"name":arr.name, "tll":arr.tll, "raf":arr.raf, "newRaf":arr.newRaf,
+			"orgRaf":arr.orgRaf}
 	}
 
-	let entry = [
-		{'name': "a", 'tll':5, 'raf': 4}
+	/*let entry = [
+		{'name': "a", 'tll':5, 'raf': 4},
+		{'name': "b", 'tll':5, 'raf': 3},
+		{'name': "c", 'tll':5, 'raf': 6},
+		{'name': "d", 'tll':5, 'raf': 7},
+		{'name': "e", 'tll':5, 'raf': 8}
+
 		
-	]
+	]*/
 
 	let data = rx.Observable.from(entry)
 		data.subscribe(proces,err,finish)
@@ -85,44 +89,40 @@
 		}
 
 		if(type == 3){
-			let count = memory.length
+			let length = memory.length
 
 			for(let i=0; i<=memory.length-1; i++){
 				memory[i].newRaf = Math.ceil(memory[i].raf/qt)
 			}
-
-			while(count > 0){
-				let rot = memory[0].newRaf 
-				for(let i=0; i<=rot; i++){
-
-					if(memory[0].newRaf > 1){
-						memory[0].newRaf -= 1
-						memory[0].orgRaf = memory[0].orgRaf - qt
-						memory[0].raf = qt
-						newJson()
-						
-					}else if(memory[0].newRaf <= 1){
-
-						if(memory[0].orgRaf == qt){
-							memory[0].newRaf -= 1
-							memory[0].raf = qt
-							newJson()
-							memory.splice(0,1)
-							i = rot
-						}else{
-							memory[0].newRaf -= 1
-							memory[0].raf = memory[0].orgRaf 
-							newJson()
-							memory.splice(0,1)
-							i = rot
+			while(length > 0){
+				let i; let j;
+				for (i = 0; i <= memory.length-1; i++) {
+					for (j = 1; j <= memory.length; j++) {
+						j = j + i
+						if(memory[j-1].raf > qt){
+							memory[j-1].raf = memory[j-1].raf - qt
+							memory[j-1].newRaf =  qt
+							temp.push(newJson(memory[j-1]))
+							j = 10
+						}else if(memory[j-1].raf == qt){
+							memory[j-1].newRaf =  qt
+							temp.push(newJson(memory[j-1]))
+							memory.splice(j-1,1)
+							j = 0
+						}else if(memory[j-1].raf < qt){
+							memory[j-1].raf = qt - memory[j-1].raf
+							memory[j-1].newRaf =  qt - memory[j-1].raf
+							temp.push(newJson(memory[j-1]))
+							memory.splice(j-1,1)
+							j = 0			
 						}
 					}
-				}count = memory.length
+				}length = memory.length
 			}
-
-			console.log("temp", temp)			
+			memory = temp
 		}
 	}
+
 
 	//Graficar
 	(function(){
@@ -133,7 +133,7 @@
 			memory[i+1].ant = memory[i].ant + memory[i].raf
 			memory[i+1].fin = memory[i+1].ant + memory[i+1].raf
 		}
-	});
+	})();
 
 	//Calcular
 	(function(){
@@ -141,8 +141,8 @@
 			memory[i].esp = memory[i].ant - memory[i].tll
 			memory[i].res = memory[i].ant + memory[i].raf
 		}
-	});
-
+	})();
+	
 	console.log("memory:",memory)
-	//return memory
-//}
+	return memory
+}
