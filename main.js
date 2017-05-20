@@ -1,10 +1,10 @@
-function cal(entry, type,qt){
+//function cal(entry, type,qt){
 
-	let rx = Rx
+	let rx = require("rxjs/Rx")
 	let memory  = []
 	let temp = []
-	//let type = 3
-	//let qt = 2
+	let type = 3
+	let qt = 2
 	let t = []
 	
 	function sorting(json, key) {
@@ -21,15 +21,11 @@ function cal(entry, type,qt){
 			"orgRaf":arr.orgRaf}
 	}
 
-	/*let entry = [
-		{'name': "a", 'tll':5, 'raf': 4},
-		{'name': "b", 'tll':5, 'raf': 3},
-		{'name': "c", 'tll':5, 'raf': 6},
-		{'name': "d", 'tll':5, 'raf': 7},
-		{'name': "e", 'tll':5, 'raf': 8}
-
-		
-	]*/
+	let entry = [
+		{'name': "a", 'tll':0, 'raf': 4},
+		{'name': "b", 'tll':0, 'raf': 5},
+		{'name': "c", 'tll':0, 'raf': 6}
+	]
 
 	let data = rx.Observable.from(entry)
 		data.subscribe(proces,err,finish)
@@ -89,40 +85,9 @@ function cal(entry, type,qt){
 		}
 
 		if(type == 3){
-			let length = memory.length
-
-			for(let i=0; i<=memory.length-1; i++){
-				memory[i].newRaf = Math.ceil(memory[i].raf/qt)
-			}
-			while(length > 0){
-				let i; let j;
-				for (i = 0; i <= memory.length-1; i++) {
-					for (j = 1; j <= memory.length; j++) {
-						j = j + i
-						if(memory[j-1].raf > qt){
-							memory[j-1].raf = memory[j-1].raf - qt
-							memory[j-1].newRaf =  qt
-							temp.push(newJson(memory[j-1]))
-							j = 10
-						}else if(memory[j-1].raf == qt){
-							memory[j-1].newRaf =  qt
-							temp.push(newJson(memory[j-1]))
-							memory.splice(j-1,1)
-							j = 0
-						}else if(memory[j-1].raf < qt){
-							memory[j-1].raf = qt - memory[j-1].raf
-							memory[j-1].newRaf =  qt - memory[j-1].raf
-							temp.push(newJson(memory[j-1]))
-							memory.splice(j-1,1)
-							j = 0			
-						}
-					}
-				}length = memory.length
-			}
-			memory = temp
+			robi()
 		}
 	}
-
 
 	//Graficar
 	(function(){
@@ -133,7 +98,7 @@ function cal(entry, type,qt){
 			memory[i+1].ant = memory[i].ant + memory[i].raf
 			memory[i+1].fin = memory[i+1].ant + memory[i+1].raf
 		}
-	})();
+	});
 
 	//Calcular
 	(function(){
@@ -141,8 +106,69 @@ function cal(entry, type,qt){
 			memory[i].esp = memory[i].ant - memory[i].tll
 			memory[i].res = memory[i].ant + memory[i].raf
 		}
-	})();
+	});
+
+	function robi(){
+		let orgLength = memory.length
+		let length = memory.length
+
+		for(let i=0; i<=memory.length-1; i++){
+			memory[i].newRaf = Math.ceil(memory[i].raf/qt)
+		}
+		
+		while(length > 0){
+			let i; let j;
+			for (i = 0; i <= memory.length-1; i++) {
+				for (j = 1; j <= memory.length; j++) {
+					j = j + i
+					if(memory[j-1].raf > qt){
+						memory[j-1].raf = memory[j-1].raf - qt
+						memory[j-1].newRaf =  qt
+						temp.push(newJson(memory[j-1]))
+						j = 10
+					}else if(memory[j-1].raf == qt){
+						memory[j-1].newRaf =  qt
+						temp.push(newJson(memory[j-1]))
+						memory.splice(j-1,1)
+						j = 0
+					}else if(memory[j-1].raf < qt){
+						memory[j-1].raf = qt - memory[j-1].raf
+						memory[j-1].newRaf =  qt - memory[j-1].raf
+						temp.push(newJson(memory[j-1]))
+						memory.splice(j-1,1)
+						j = 0			
+					}
+				}
+			}length = memory.length
+		}
+
+		(function(){
+			//Graficar Round Robi
+			temp[0].ant = 0 //Constante
+			temp[0].fin = temp[0].ant + temp[0].newRaf
+
+			for(let i=0; i<temp.length-1; i++){
+				temp[i+1].ant = temp[i].ant + temp[i].newRaf
+				temp[i+1].fin = temp[i+1].ant + temp[i+1].newRaf
+			}
+
+			//Calcular Round Robi
+			for(let i=0; i<=temp.length-1; i++){
+				temp[i].esp = temp[i].fin - temp[i].tll - temp[i].orgRaf
+				temp[i].res = temp[i].fin - temp[i].tll
+			}
+		})();
+
+		for (let i = 0; i < temp.length; i++) {
+			for (let j = 1; j < temp.length; j++) {		
+				if(temp[i].name == temp[j].name){
+					temp[i] = temp[j]
+				}
+			}			
+		}temp.splice(orgLength,temp.length)
+			memory = temp
+	}
 	
 	console.log("memory:",memory)
 	return memory
-}
+//}

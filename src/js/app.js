@@ -26,16 +26,14 @@ let app = new Vue({
 			this.name = "",
 			this.tll = 0,
 			this.raf = 0,
-			this.pri = 0,
-			this.qt = 0
+			this.pri = 0
 		},
 		add: function(event){
 			this.datas.push({
 				'name':this.name,
 				'tll': this.tll,
 				'raf': this.raf,
-				'pri': this.pri,
-				'qt': this.qt
+				'pri': this.pri
 			})
 		},
 		back: function(){
@@ -43,10 +41,10 @@ let app = new Vue({
 			this.wrap_s = false
 			this.change()
 		},
-		calcular: function(){
+		calcular: function(type){
 			this.wrap_p = false
 			this.wrap_s = true
-			this.datas = cal(this.datas,2)
+			this.datas = cal(this.datas,type,2)
 		}
 	}
 })
