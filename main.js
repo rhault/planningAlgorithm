@@ -22,9 +22,10 @@
 	}
 
 	let entry = [
-		{'name': "a", 'tll':0, 'raf': 4},
-		{'name': "b", 'tll':0, 'raf': 5},
-		{'name': "c", 'tll':0, 'raf': 6}
+		{'name': "a", 'tll':0, 'raf': 7},
+		{'name': "b", 'tll':0, 'raf': 9},
+		{'name': "c", 'tll':0, 'raf': 10},
+		{'name': "d", 'tll':0, 'raf': 5}
 	]
 
 	let data = rx.Observable.from(entry)
@@ -121,6 +122,7 @@
 			for (i = 0; i <= memory.length-1; i++) {
 				for (j = 1; j <= memory.length; j++) {
 					j = j + i
+					console.log(memory[j-1], j-1, i, memory.length)
 					if(memory[j-1].raf > qt){
 						memory[j-1].raf = memory[j-1].raf - qt
 						memory[j-1].newRaf =  qt
@@ -137,6 +139,9 @@
 						temp.push(newJson(memory[j-1]))
 						memory.splice(j-1,1)
 						j = 0			
+					}
+					if(i == memory.length){
+						j = 10
 					}
 				}
 			}length = memory.length
@@ -162,7 +167,8 @@
 		for (let i = 0; i < temp.length; i++) {
 			for (let j = 1; j < temp.length; j++) {		
 				if(temp[i].name == temp[j].name){
-					temp[i] = temp[j]
+					temp[i].esp = temp[j].esp
+					temp[i].res = temp[j].res
 				}
 			}			
 		}temp.splice(orgLength,temp.length)
